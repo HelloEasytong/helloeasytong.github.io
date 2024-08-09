@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Browser</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #browser {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        #address-bar {
+            padding: 10px;
+            background: #f1f1f1;
+            border-bottom: 1px solid #ddd;
+        }
+        #address-bar input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #content {
+            flex: 1;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="browser">
+        <div id="address-bar">
+            <input type="text" id="url-input" placeholder="Enter URL and press Enter">
+        </div>
+        <div id="content">
+            <iframe id="webview" src="https://www.example.com"></iframe>
+        </div>
+    </div>
+    <script>
+        document.getElementById('url-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const url = this.value;
+                if (url) {
+                    document.getElementById('webview').src = url.startsWith('http') ? url : 'http://' + url;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
